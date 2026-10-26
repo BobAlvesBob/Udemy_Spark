@@ -1,0 +1,10 @@
+.metals/
+.bloop/
+.bsp/
+.vscode/
+target/
+project/target/
+project/project/
+metals.sbt
+SparkScalaCourse/data/ml-100k/
+ml-100k/
