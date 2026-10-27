@@ -20,6 +20,24 @@ def parseLine(line:String): (String, String, Float) = {
         
         val lines = sc.textFile("data/1800.csv")
 
+        val parsedLines = lines.map(parseLine)
+
+        val minTemps = parsedLines.filter(x => x._2 == "TMIN")
+
+        val stationTemps = minTemps.map(x => (x._1, x._3.toFloat))
+
+        val minTempsByStation = stationTemps.reduceByKey((x,y)=> min(x,y))
+
+        val results = minTempsByStation.collect()
+        for(result <- results.sorted){
+            val station = result._1
+            val temp = result._2
+            val formattedTemp = f"$temp%.2f F"
+
+            println(s"$station minimum temperature: $formattedTemp")
+
+        }
+
     }
 
 
